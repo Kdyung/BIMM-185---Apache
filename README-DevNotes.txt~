@@ -1,27 +1,6 @@
 README
 Development Notes:
 Directory: /var/www
- cd /var/www/
-  
- check disk space df -h
-
-#access the webserver installed
-http://localhost/
-
-#access the scripts written
-vi hello.php
-http://localhost/hello.py
-
-#php to executable
-python hello.py 
-chmod a+x hello.php 
-
-/etc/init.d/apache2 restart
-
-vi /etc/apache2/sites-enabled/000-default 
-vi /var/log/apache2/error.log 
-
-
 
 This folder is the /www/ folder of Apache2 systems on a Linux platform. This contains the programs implemented with Apache2, PHP5 and MySQL.
 
