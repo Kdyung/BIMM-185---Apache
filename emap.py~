@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#Demo self-made apache-openable script
+
 import cgitb
 cgitb.enable()
 
