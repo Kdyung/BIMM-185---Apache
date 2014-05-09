@@ -7,6 +7,9 @@ __author__ = 'kdyung'
 #Until I figure out how to make this communicate with the web server, this is how I am doing it.
 #Using Baderlab tutorial:
 #
+
+#sample input = 12hr_topgenes.txt
+
 import sys,os, cgi
 
 try:
@@ -19,12 +22,18 @@ version = '0.1'
 
 def main():
     (options,args) =  parse_command_line()
+    #Test input:
+    infilename = 'DavidTutorial/12hr_topgenes.txt'
+    infile = open(infilename,'r')
+
     #do stuff
     print "EMAP"
     
     
     return
 
+def runDAVID():
+    return
 
 
 def parse_command_line():
