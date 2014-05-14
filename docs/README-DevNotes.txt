@@ -21,7 +21,11 @@ chmod a+x hello.php
 vi /etc/apache2/sites-enabled/000-default 
 vi /var/log/apache2/error.log 
 
+#Installing setup-tools-python
+wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
 
+#installing suds
+python setup.py install
 
 This folder is the /www/ folder of Apache2 systems on a Linux platform. This contains the programs implemented with Apache2, PHP5 and MySQL.
 
