@@ -61,7 +61,7 @@ def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName=
         print 'write file:', resF, 'finished!'
 
 if __name__ == '__main__':
-    #I believe this is for the main client, going to try editing
+    #I believe this is for the main client, going to tray editing
     DAVIDenrich(listF = './list1.txt', idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list1', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
     DAVIDenrich(listF = './list2.txt', idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list2', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
     DAVIDenrich(listF = './list2.txt', bgF = './list1.txt', idType = 'AFFYMETRIX_3PRIME_IVT_ID', bgName = 'Background1', listName = 'list2', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')

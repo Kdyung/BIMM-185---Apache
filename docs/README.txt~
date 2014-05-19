@@ -4,12 +4,19 @@ README
 Author: Kyra Yung
 Date: April 27th, 2014
 
-
 Required Software
 ===
 Using DAVID Web client for python requires suds (a lightweight SOAP python client for consuming Web Services) 
 Download and install suds-0.4 (orlater version) from https://fedorahosted.org/suds/
 Suds requires python-setuptools-devel to install. Link: https://pypi.python.org/pypi/setuptools#installation-instructions
+
+Project Status:
+===
+5-18-14
+Working on connecting to DAVID still, there are some problems such as complications communicating with the DAVID API. It is unknown whether it is preferable to use the web service python client (which is currently returning HTTP errors) or using the url (which returns dubiuos output).
+
+
+
 
 
 
@@ -21,14 +28,13 @@ Directory Descriptions
 / DAVID_py/
 Files for python client of DAVID web service.
 NOTE: Web service registered with the email: kyung@ucsd.edu 
+DAVIDWEbService_Client.py was edited to reflect this and executed.
 
 
 
 
 
 References:
-
-
 Xiaoli Jiao, Brad T. Sherman, Da Wei Huang, Robert Stephens, Michael W. Baseler, H. Clifford Lane, Richard A. Lempicki
 
 DAVID-WS: A Stateful Web Service to Facilitate Gene/Protein List Analysis Bioinformatics 2012 doi:10.1093/bioinformatics/bts251
