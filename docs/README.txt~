@@ -13,7 +13,7 @@ Suds requires python-setuptools-devel to install. Link: https://pypi.python.org/
 Project Status:
 ===
 5-18-14
-Working on connecting to DAVID still, there are some problems such as complications communicating with the DAVID API. It is unknown whether it is preferable to use the web service python client (which is currently returning HTTP errors) or using the url (which returns dubiuos output).
+Working on connecting to DAVID still, there are some problems such as complications communicating with the DAVID API. It is unknown whether it is preferable to use the web service python client (5-9-14 the service is currently down) or using the url (which returns dubiuos output).
 
 
 

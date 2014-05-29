@@ -32,6 +32,17 @@ DAVIDWEbService_Client.py was edited to reflect this and executed.
 
 
 
+Implemented Components:
+
+D3.js
+A java application that is a web page element manipulator. Used to bind web page elements.
+Copyright (c) 2010-2014, Michael Bostock
+All rights reserved.
+
+
+
+
+
 
 
 References:

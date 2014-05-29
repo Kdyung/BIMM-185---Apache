@@ -1,7 +1,0 @@
-Web-Implemented Enrichment Mapping using DAVID Prototype
-====================
-Author: Kyra Yung
-
-
-Using DAVID Web client for python requires suds (a lightweight SOAP python client for consuming Web Services) 
-Download and install suds-0.4 (orlater version) from https://fedorahosted.org/suds/
