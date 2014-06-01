@@ -30,13 +30,12 @@ python setup.py install
 This folder is the /www/ folder of Apache2 systems on a Linux platform. This contains the programs implemented with Apache2, PHP5 and MySQL.
 
 
-Installation(from Onelaboratory):
 
+Installation(from Onelaboratory):
 >sudo apt-get install apache2
 ​>sudo apt-get install mysql-server
 ​>sudo apt-get install php5 libapache2-mod-php5
 >sudo /etc/init.d/apache2 restart
-
 After installation, you will need to configure your networking. I recommend a combination of "NAT" and "Host-only" as the networking interface. NAT will be used by the VM to connect to the internet, while Host-Only will allow you to connect to your VM (SSH-ing into it and testing your web services). By default, NAT is already configured on the Adapter 1 interface.
 
 To add the Host-Only adapter, here are instructions:

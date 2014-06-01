@@ -11,6 +11,8 @@ __author__ = 'kdyung'
 #sample input = 12hr_topgenes.txt
 
 import sys,os, cgi
+import web
+
 
 try:
 	from optparse import OptionParser
@@ -54,29 +56,19 @@ def main():
         print i.strip().split()
     print "Number of genes : %s"%len(genelist)
     print genelist[20]
+
 #   Cytoscape instruction data
     gene_identifier = "OFFFICIAL_GENE_SYMBOL"
     species = 'Homo sapiens'
     list_type = 'Gene list'
     
     
-    ##Generating DAVID data using url
-    list_type = 'type=ENTREZ_GENE_ID'
-    tool = '&tool=list'
-    ids_str = '&ids='
-    annot_str = '&annot=xxxxx,xxxxxx,xxxxx,'
-    for i in genelist:
-        #genes given in OFFFICIAL_GENE_SYMBOL need to convert genes to id number
-        ids_str = '%s%s,'%(ids_str,i)
-    url = "http://david.abcc.ncifcrf.gov/api.jsp?%s%s%s"%(list_type,ids_str,tool)
-    print url
-    
     #Download Functional Annotation Chart
-
     #do stuff
     DAVIDenrich(listF = infilename, idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list1', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
 
     return
+
 
 #David Python client contains code ChartReport.py that is edited to use for development. This method is borrowed from CHartReport and requires connecting to the client to work
 #Requires running DAVIDWebService_Client.py run beforehand
