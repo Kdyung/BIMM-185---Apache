@@ -11,9 +11,8 @@ __author__ = 'kdyung'
 #sample input = 12hr_topgenes.txt
 
 import sys,os, cgi
-import cgitb
-cgitb.enable()    print("Content-Type: text/html;charset=utf-8")
-    print()    print("Hello World!")
+import cgitb; cgitb.enable()    
+
 try:
 	from optparse import OptionParser
 except:
@@ -57,6 +56,8 @@ def main():
         genelist.extend(i.strip().split())
         #print i.strip().split()
     print "Number of genes : %s"%len(genelist)
+    if len(genelist) > 3000:
+        print "Too many genes! (limit:3000)"
     print genelist[20]
 
 #   Cytoscape instruction data
@@ -68,11 +69,13 @@ def main():
     #Download Functional Annotation Chart
     #do stuff
     DAVIDenrich(listF = demofilename, idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list1', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
-    DAVIDenrich(listF = infilename, idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list1', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+    print "Testing BADERDATA"
+    DAVIDenrich(listF = infilename, idType = 'OFFICIAL_GENE_SYMBOL', listName = '12hrname', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
     return
 
 
 #David Python client contains code ChartReport.py that is edited to use for development. This method is borrowed from CHartReport and requires connecting to the client to work
+#LIMITS: No more than 400 genes
 #Requires running DAVIDWebService_Client.py run beforehand
 # by courtesy of HuangYi @ 20110424
 def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName='List1', category = '', thd=0.1, ct=2):
@@ -128,6 +131,7 @@ def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName=
             rowList = [categoryName,termName,listHits,percent,ease,Genes,listTotals,popHits,popTotals,foldEnrichment,bonferroni,benjamini,FDR]
             fOut.write('\t'.join(rowList)+'\n')
         print 'write file:', resF, 'finished!'
+        return
 
 
 def parse_command_line():

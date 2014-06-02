@@ -1,0 +1,4 @@
+ * Restarting web server apache2
+Action 'start' failed.
+The Apache error log may have more information.
+   ...fail!
