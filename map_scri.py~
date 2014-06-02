@@ -11,8 +11,9 @@ __author__ = 'kdyung'
 #sample input = 12hr_topgenes.txt
 
 import sys,os, cgi
-import cgitb; cgitb.enable()    
-
+import cgitb
+cgitb.enable()    print("Content-Type: text/html;charset=utf-8")
+    print()    print("Hello World!")
 try:
 	from optparse import OptionParser
 except:
