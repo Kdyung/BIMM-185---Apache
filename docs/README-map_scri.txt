@@ -68,7 +68,8 @@ Citations and References
 DAVID Web Client:
 Xiaoli Jiao, Brad T. Sherman, Da Wei Huang, Robert Stephens, Michael W. Baseler, H. Clifford Lane, Richard A. Lempicki DAVID-WS: A Stateful Web Service to Facilitate Gene/Protein List Analysis Bioinformatics 2012 doi:10.1093/bioinformatics/bts251
 
- Suds:
+Suds:
  
- Bootstrap:
+Bootstrap:
  
+D3

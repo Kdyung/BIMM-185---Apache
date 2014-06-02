@@ -1,0 +1,19 @@
+Common Dev Commands:
+=====
+
+Running program:
+http://localhost/map_scri.html
+
+Restarting Apache2:
+>   sudo /etc/init.d/apache2 restart
+
+Configuring Apache2:
+>   gedit /etc/apache2/sites-enabled/000-default
+
+
+git remote set-url origin git@github.com:kdyung/BIMM-185---Apache.git
+
+
+pushing works with this command:
+git push origin master -u
+
