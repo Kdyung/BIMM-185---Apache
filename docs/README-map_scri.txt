@@ -4,19 +4,25 @@ README
 Author: Kyra Yung
 Date: April 27th, 2014
 
+
+Description
+===
+
+
+Usage
+===
+The thing
+
+
 Required Software
 ===
-All components are included in github
-
-Using DAVID Web client for python requires suds (a lightweight SOAP python client for consuming Web Services) 
-Download and install suds-0.4 (orlater version) from https://fedorahosted.org/suds/
-Suds requires python-setuptools-devel to install. Link: https://pypi.python.org/pypi/setuptools#installation-instructions
-
+(All components are included in github directories)
+Using DAVID Web client for python requires suds (a lightweight SOAP python client for consuming Web Services). Download and install suds-0.4 (or later version) from https://fedorahosted.org/suds/
+Suds requires python-setuptools-devel to install. (Link: https://pypi.python.org/pypi/setuptools#installation-instructions)
 
 
 Setup
 ====
-
 Setting up DAVID Client:
     The DAVID Web service requires suds. If suds is not installed, install suds by downloading version 0.4 or later and following the documentation, or go to the suds folder and install using setup.py with the following command.
         >
@@ -39,15 +45,21 @@ Working on connecting to DAVID still, there are some problems such as complicati
 
 
 
-Directory Descriptions
+Directories Included (Descriptions)
 ===
-/DavidTutorial/
+/sampledata/
  Sample data from Bader Lab for generating an Enrichment map. Data contained is Estradiol-treated MCF7 cells, 12 and 24hrs (Gene Expression Omnibus: GSE11352).
+ 
+/samplecode/
+ Code used for testing and learning purposes.
  
 / DAVID_py/
 Files for python client of DAVID web service.
 NOTE: Web service registered with the email: kyung@ucsd.edu 
 DAVIDWEbService_Client.py was edited to reflect this and executed.
+
+/js/ and /fonts/
+Both initally directories belonging to the Bootstrap library. Also contain other scripts used for building web client.
 
 
 
