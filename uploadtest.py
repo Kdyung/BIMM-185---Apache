@@ -21,7 +21,7 @@ if fileitem.filename:
    
    # strip leading path from file name to avoid directory traversal attacks
    fn = os.path.basename(fileitem.filename)
-   open('files/' + fn, 'wb').write(fileitem.file.read())
+   open(fn, 'wb').write(fileitem.file.read()) #edited
    message = 'The file "' + fn + '" was uploaded successfully'
    
 else:

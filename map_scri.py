@@ -23,12 +23,9 @@ version = '0.1'
 """Step 1: Generate DAVID output files
 
 #    Select Official Gene Symbol in Step 2: Select Identifier
-
     Select Gene list in Step 3: Select List Type
-
     Click Submit list
     Select species: Homo sapiens
-
     Click Functional Annotation Chart - Screen shot of where to get DAVID output chart
     Download file - This is the file you can use in Enrichment Map (Dataset 1 or 2:Enrichment Results) """
     
@@ -40,6 +37,23 @@ version = '0.1'
 #Downloading a file using python
 
 
+form = cgi.FieldStorage()
+# A nested FieldStorage instance holds the file
+fileitem = form['file']
+# Test if the file was uploaded
+if fileitem.filename:
+   fn = os.path.basename(fileitem.filename)
+   open(fn, 'wb').write(fileitem.file.read()) #edited
+   message = 'The file "' + fn + '" was uploaded successfully'
+else:
+   message = 'No file was uploaded'
+   sys.exit()   
+print """\
+Content-Type: text/html\n
+<html><body>
+<p>%s</p>
+</body></html>
+""" %(message,)
 
 def main():
     print "Executing map_scri.py ...."

@@ -1,0 +1,11 @@
+<html><body>
+<h1>Clustering Gene Data Client</h1>
+<p>Given a table of gene expression data, generates a visual clusting heatmap.</p>
+<p>Author: Kyra Yung </p>
+<p>Upload a gene expression table file in UNICODE-8 format:</p>
+<form enctype="multipart/form-data" action="uploadtest.py" method="post">
+    <p>File: <input type="file" name="file"></p>
+    <p><input type='boolean' name="Hamming/Euclidean"</p>
+    <p><input type="submit" value="Upload"></p>
+</form>
+</body></html>
