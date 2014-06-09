@@ -19,7 +19,7 @@ import scipy.cluster.hierarchy as hier
 import scipy.spatial.distance as dist
 
 def main():
-    getData()
+    dataMatrix,rowHeaders = getData()
     #Calculate distance matrix
     distanceMatrix = dist.pdist(dataMatrix)
     #Add choosing
@@ -57,7 +57,7 @@ def main():
     outfile.write( 'var data = ' + str(matrixOutput) + ";")
     outfile.write( 'var cols = ' + str(colHeaders) + ";")
     outfile.write( 'var rows = ' + str([x for x in orderedRowHeaders]) + ";")
-    
+    outfile.close()
 
 
 def getData(filename = './sampledata/expdata_ng'):
@@ -75,7 +75,7 @@ def getData(filename = './sampledata/expdata_ng'):
 
     #convert native data array into a numpy array
     dataMatrix = numpy.array(dataMatrix) 
-    return dataMatrix
+    return dataMatrix,rowHeaders
     
     
     

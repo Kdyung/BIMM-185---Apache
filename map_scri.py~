@@ -10,7 +10,7 @@ __author__ = 'kdyung'
 
 #sample input = 12hr_topgenes.txt
 
-import sys,os, cgi
+import sys,os,cgi
 import cgitb; cgitb.enable()    
 
 try:
@@ -43,26 +43,27 @@ fileitem = form['file']
 # Test if the file was uploaded
 if fileitem.filename:
    fn = os.path.basename(fileitem.filename)
-   open(fn, 'wb').write(fileitem.file.read()) #edited
-   message = 'The file "' + fn + '" was uploaded successfully'
+   infilename = open(fn, 'wb').write(fileitem.file.read()) #edited
+   print '<p>%s</p>'%infilename
+   message = '<p>The file "' + fn + '" was uploaded successfully</p>'
 else:
-   message = 'No file was uploaded'
+   message = '<p>No file was uploaded</p>'
    sys.exit()   
 print """\
 Content-Type: text/html\n
 <html><body>
 <p>%s</p>
 </body></html>
-""" % (message,)
+""" %(message,)
 
 def main():
     print "Executing map_scri.py ...."
+    print "<p>Input file name : %s</p>"
     (options,args) =  parse_command_line()
     
 #    Step 1: Generate DAVID output files
     #Test input:
-    infilename = options.inlist
-    demofilename = 'DAVID_py/list1.txt'
+    #infilename = options.inlist
     
     #following reads list of genes seperated by newline
     genelist = []
@@ -82,9 +83,11 @@ def main():
     
     #Download Functional Annotation Chart
     #do stuff
-    DAVIDenrich(listF = demofilename, idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list1', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+    #DAVIDenrich(listF = demofilename, idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list1', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
     print "Testing BADERDATA"
-    DAVIDenrich(listF = infilename, idType = 'GENE_SYMBOL', listName = '12hrname', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+    outfile=DAVIDenrich(listF = infilename, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+    print "<p>Right click 'Save link as' to download"
+    print "<a href=\"%s\" target=\"_blank\">Download</a>"%outfile
     return
 
 
@@ -97,9 +100,9 @@ def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName=
     import os
     if len(listF) > 0 and os.path.exists(listF):
         inputListIds = ','.join(open(listF).read().split('\n'))
-        print 'List loaded.'        
+        print '<p>List loaded.</p>'        
     else:
-        print 'No list loaded.'
+        print '<p>No list loaded.</p>'
         raise
     flagBg = False
     if len(bgF) > 0 and os.path.exists(bgF):
@@ -144,8 +147,8 @@ def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName=
             FDR = str(rowDict['afdr'])
             rowList = [categoryName,termName,listHits,percent,ease,Genes,listTotals,popHits,popTotals,foldEnrichment,bonferroni,benjamini,FDR]
             fOut.write('\t'.join(rowList)+'\n')
-        print 'write file:', resF, 'finished!'
-        return
+        print '<p>write file:', resF, 'finished!<p>'
+        return resF
 
 
 def parse_command_line():

@@ -33,3 +33,5 @@ Content-Type: text/html\n
 <p>%s</p>
 </body></html>
 """ % (message,)
+print "<a href=\"demo.txt\" target=\"_blank\">Download</a>"
+#<a href="http://example.com/files/myfile.pdf" target="_blank">Download</a>
