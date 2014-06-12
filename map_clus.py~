@@ -4,11 +4,8 @@
 #http://homer.salk.edu/homer/basicTutorial/clustering.html
 
 
-#Code Sampled: http://blog.nextgenetics.net/?e=44
+#Code Sampled for implementing Heatmap: http://blog.nextgenetics.net/?e=44
 #   by Damian Kao
-
-# Pycluster needed. 
-    #Installed >?
 
 # Take input of normalized gene expression matrix
 #test file: /SampleData/expdata_ng
@@ -19,7 +16,7 @@ import scipy.cluster.hierarchy as hier
 import scipy.spatial.distance as dist
 
 def main():
-    getData()
+    dataMatrix,rowHeaders = getData()
     #Calculate distance matrix
     distanceMatrix = dist.pdist(dataMatrix)
     #Add choosing
@@ -57,10 +54,10 @@ def main():
     outfile.write( 'var data = ' + str(matrixOutput) + ";")
     outfile.write( 'var cols = ' + str(colHeaders) + ";")
     outfile.write( 'var rows = ' + str([x for x in orderedRowHeaders]) + ";")
-    
+    outfile.close()
 
 
-def getData(filename = './sampledata/expdata_ng'):
+def getData(filename = './sampledata/input.data'):
     #open the file assuming the data above is in a file called 'dataFile'
     inFile = open(filename,'r')
     #save the column/row headers (conditions/genes) into an array
@@ -75,7 +72,7 @@ def getData(filename = './sampledata/expdata_ng'):
 
     #convert native data array into a numpy array
     dataMatrix = numpy.array(dataMatrix) 
-    return dataMatrix
+    return dataMatrix,rowHeaders
     
     
     

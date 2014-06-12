@@ -1,9 +1,37 @@
-<html><body><h1>Enrichment Mapping</h1>
-<p>Kyra Yung</p>
-<p>Content to be added as default web page</p>
-<p>Buttons here</p>
-<p>Obtain input from user</p>
-<p>Output here?</p>
-<a href="map_scri.html">Obtain DAVID Output for Enrichment Mapping</a>
-<a href="map_clus.html">Gene Clustering</a>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+        <h1>Enrichment Mapping</h1>
+        <p>Author: Kyra Yung</p>
+        <p>This is a project project that implements the visualization gene expression</p>
+        <p>Obtain input from user</p>
+        <p>DAVID Web Service</p>
+        <p>Accesses the DAVID Web Service programmatically and produces output that can be downloaded</p>
+        <a href="map_scri.html">Obtain DAVID Output for Enrichment Mapping</a>
+        <p> </p>
+        <p>Gene Clustering</p>
+        <p>Takes in gene expression data and outputs a heatmap for visualizing</p>
+    <a href="map_clus.html">Gene Clustering</a>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+

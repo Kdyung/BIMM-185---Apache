@@ -1,7 +1,7 @@
 <html>
    <head>
-   <p> Yo this shit is poppin'</p>
-   <script type="text/javascript" src="d3/d3.js"></script>
+   <p> Gene Expression HeatMap</p>
+   <script type="text/javascript" src="d3.v2.js"></script>
    <script type="text/javascript" src="demo_clus_data.js"></script>
    <style>
       body {
@@ -16,7 +16,7 @@
       //height of each row in the heatmap
       var h = 5;
       //width of each column in the heatmap
-      var w = 70;
+      var w = 60;
 
       //attach a SVG element to the document's body
       var mySVG = d3.select("body")

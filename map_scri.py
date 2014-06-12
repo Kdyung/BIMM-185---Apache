@@ -1,133 +1,49 @@
-#!/usr/bin/python
-__author__ = 'kdyung'
+#!/usr/bin/env python
+import cgi, os
+
+import cgitb; cgitb.enable()
+from suds.client import Client
+
+try: # Windows needs stdio set for binary mode.
+    import msvcrt
+    msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+    msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+except ImportError:
+    pass
 
 
-#BIMM 185 EMap project
-#In the interest of implementing the pipeline, this non web-implemented prototype is made to see how to communicate between the programs.
-#Until I figure out how to make this communicate with the web server, this is how I am doing it.
-#Using Baderlab tutorial:
-#
-
-#sample input = 12hr_topgenes.txt
-
-import sys,os,cgi
-import cgitb; cgitb.enable()    
-
-try:
-	from optparse import OptionParser
-except:
-	print "Module optparse not found: you need Python version 2.3 or later"
-	sys.exit(-1)
-version = '0.1'
-
-"""Step 1: Generate DAVID output files
-
-#    Select Official Gene Symbol in Step 2: Select Identifier
-    Select Gene list in Step 3: Select List Type
-    Click Submit list
-    Select species: Homo sapiens
-    Click Functional Annotation Chart - Screen shot of where to get DAVID output chart
-    Download file - This is the file you can use in Enrichment Map (Dataset 1 or 2:Enrichment Results) """
-    
-    
-# 	http://david.abcc.ncifcrf.gov/api.jsp?type=xxxxx&ids=XXXXX,XXXXX,XXXXXX,&tool=xxxx&annot=xxxxx,xxxxxx,xxxxx,
-###http://david.abcc.ncifcrf.gov/content.jsp?file=DAVID_API.html
-
-#http://stackoverflow.com/questions/22676/how-do-i-download-a-file-over-http-using-python
-#Downloading a file using python
-
-
-form = cgi.FieldStorage()
-# A nested FieldStorage instance holds the file
-fileitem = form['file']
-# Test if the file was uploaded
-if fileitem.filename:
-   fn = os.path.basename(fileitem.filename)
-   infilename = open(fn, 'wb').write(fileitem.file.read()) #edited
-   print '<p>%s</p>'%infilename.readline()
-   message = '<p>The file "' + fn + '" was uploaded successfully</p>'
-else:
-   message = '<p>No file was uploaded</p>'
-   sys.exit()   
-print """\
-Content-Type: text/html\n
-<html><body>
-<p>%s</p>
-</body></html>
-""" %(message,)
-
-def main():
-    print "Executing map_scri.py ...."
-    print "<p>Input file name : %s</p>"
-    (options,args) =  parse_command_line()
-    
-#    Step 1: Generate DAVID output files
-    #Test input:
-    #infilename = options.inlist
-    
-    #following reads list of genes seperated by newline
-    genelist = []
-    for i in open(infilename,'r').readlines():
-        genelist.extend(i.strip().split())
-        #print i.strip().split()
-    print "Number of genes : %s"%len(genelist)
-    if len(genelist) > 3000:
-        print "Too many genes! (limit:3000)"
-    print genelist[20]
-
-#   Cytoscape instruction data
-    gene_identifier = "OFFFICIAL_GENE_SYMBOL"
-    species = 'Homo sapiens'
-    list_type = 'Gene list'
-    
-    
-    #Download Functional Annotation Chart
-    #do stuff
-    #DAVIDenrich(listF = demofilename, idType = 'AFFYMETRIX_3PRIME_IVT_ID', listName = 'list1', category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
-    print "Testing BADERDATA"
-    outfile=DAVIDenrich(listF = infilename, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
-    print "<p>Right click 'Save link as' to download"
-    print "<a href=\"%s\" target=\"_blank\">Download</a>"%outfile
-    return
-
-
-#David Python client contains code ChartReport.py that is edited to use for development. This method is borrowed from CHartReport and requires connecting to the client to work
-#LIMITS: No more than 400 genes
-#Requires running DAVIDWebService_Client.py run beforehand
-# by courtesy of HuangYi @ 20110424
 def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName='List1', category = '', thd=0.1, ct=2):
-    from suds.client import Client
-    import os
-    if len(listF) > 0 and os.path.exists(listF):
-        inputListIds = ','.join(open(listF).read().split('\n'))
-        print '<p>List loaded.</p>'        
-    else:
-        print '<p>No list loaded.</p>'
-        raise
+    message=""
+    inputListIds = ','.join(listF.split())
     flagBg = False
-    if len(bgF) > 0 and os.path.exists(bgF):
-        inputBgIds = ','.join(open(bgF).read().split('\n'))
-        flagBg = True
-        print 'Use file background.'
-    else:
-        print 'Use default background.'
     client = Client('http://david.abcc.ncifcrf.gov/webservice/services/DAVIDWebService?wsdl')
-    print 'User Authentication:',client.service.authenticate('kyung@ucsd.edu')
+    client.service.authenticate('kyung@ucsd.edu')
+    message = "User Authentication"
+
     listType = 0
-    print 'Percentage mapped(list):', client.service.addList(inputListIds,idType,listName,listType)
+    #print 'Percentage mapped(list):',
+    client.service.addList(inputListIds,idType,listName,listType)
     if flagBg:
         listType = 1
-        print 'Percentage mapped(background):', client.service.addList(inputBgIds,idType,bgName,listType)
-    print 'Use categories:', client.service.setCategories(category)
-    chartReport = client.service.getChartReport(thd,ct)
-    chartRow = len(chartReport)
-    print 'Total chart records:',chartRow
+        #print 'Percentage mapped(background):', 
+        client.service.addList(inputBgIds,idType,bgName,listType)
+
+    #print 'Use categories:', 
+    client.service.setCategories(category) #problems
+    
+    #chartReport = client.service.getChartReport(thd,ct) #problems KEY
+    chartReport = ""
+    
+    #chartRow = len(chartReport)
+    #print 'Total chart records:',chartRow
+    
+    resF = "map_scri_job"
     #resF is output filename and directory)-KY
     if len(resF) == 0 or not os.path.exists(resF):
         if flagBg:
-            resF = listF + '.withBG.chartReport'
+            resF = resF + '.withBG.chartReport'
         else:
-            resF = listF + '.chartReport'
+            resF = resF + '.chartReport'
     with open(resF, 'w') as fOut:
         fOut.write('Category\tTerm\tCount\t%\tPvalue\tGenes\tList Total\tPop Hits\tPop Total\tFold Enrichment\tBonferroni\tBenjamini\tFDR\n')
         for row in chartReport:
@@ -151,18 +67,45 @@ def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName=
         return resF
 
 
-def parse_command_line():
-    usage = "Given a filename or list of genes, outputs Enrichment Map viable DAVID Output."
-    parser = OptionParser(usage=usage,version="%prog "+version)
-   
-    parser.add_option("-l","--list",action="store",dest="inlist",metavar="<Gene List Input>",type='string',help="The path to the input gene list (for DAVID).",default='./SampleData/12hr_topgenes.txt')
-    
-    (options, args)=parser.parse_args()
-    if len(sys.argv)<1: 
-        parser.print_help()
-        sys.exit(-1)
- 
-    return (options,args)
 
-if __name__ == "__main__" :
-  main()
+
+form = cgi.FieldStorage()
+
+genelist =""
+infilename = ''
+# A nested FieldStorage instance holds the file
+fileitem = form['file']
+# Test if the file was uploaded
+if fileitem.file:
+   
+   # strip leading path from file name to avoid directory traversal attacks
+   fn = os.path.basename(fileitem.filename)
+   #open(fn, 'wb').write(fileitem.file.read()) #edited
+   linecount = 0
+   infilename = fn
+   while 1:
+        line = fileitem.file.readline().strip()
+        genelist = genelist+line
+        if not line: break
+        linecount = linecount + 1
+   message = 'The file "' + fn + ' was uploaded successfully. Line count :  %s'%linecount
+       # It's an uploaded file; count lines
+   
+else:
+   message = 'No file was uploaded'
+   #return
+   
+#process lines
+
+outfile=DAVIDenrich(listF = genelist, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+
+print """\
+Content-Type: text/html\n
+<html><body>
+<p>%s</p>
+</body></html>
+""" % (message,)
+print "<p>File output : %s</p>"%outfile
+print "<p>Currently there is an issue with accessing the DAVID Web Service -KY</p>
+print "<a href=\"map_scri_job.chartReport\" target=\"_blank\">Download</a>"
+#<a href="http://example.com/files/myfile.pdf" target="_blank">Download</a>
