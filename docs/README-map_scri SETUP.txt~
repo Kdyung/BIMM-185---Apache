@@ -33,11 +33,7 @@ Setting up DAVID Client:
         >python DAVIDWebService_Client.py
     Evecuting the DAVID Web Service requires registration to the DAVID web site. Currently registered with email 'kyung.ucsd.edu'. The python code DAVIDWebService_Client.py, which initiates the client, is modified for this fact.
     After running python script DAVIDWebService_Client.py in the DAVID_py directory, the program will be able to access the Web service programmatically.
-Setting up Clustering Client:
-    Install scipy to the python libraries.
-    Instructions here: http://www.scipy.org/install.html
-    For Linux:
-        >sudo apt-get install python-numpy python-scipy
+    
     
 All other components included and linked to in project directories.
 
