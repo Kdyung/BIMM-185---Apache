@@ -18,12 +18,11 @@ print colHeaders
 rowHeaders = []
 dataMatrix = []
 for line in clusterdata[1:]:
-    if len(line)>0:
-	    data = line.strip().split()
-	    print line
-	    print data[0]
-	    rowHeaders.append(data[0])
-	    dataMatrix.append([float(x) for x in data[1:]])
+	data = line.strip().split()
+	print line
+	print data[0]
+	rowHeaders.append(data[0])
+	dataMatrix.append([float(x) for x in data[1:]])
 print rowHeaders
 sys.exit()
 #convert native python array into a numpy array

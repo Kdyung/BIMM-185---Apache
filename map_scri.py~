@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+
+#BIMM 185 EMap project
+#In the interest of implementing the pipeline, this non web-implemented prototype is made to see how to communicate between the programs.
+#Until I figure out how to make this communicate with the web server, this is how I am doing it.
+#Using Baderlab tutorial:
+#
+
+#sample input = 12hr_topgenes.txt
 import cgi, os
 
 import cgitb; cgitb.enable()
@@ -31,7 +39,7 @@ def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName=
     #print 'Use categories:', 
     client.service.setCategories(category) #problems
     
-    #chartReport = client.service.getChartReport(thd,ct) #problems KEY
+    #chartReport = client.service.getChartReport(thd,ct) #Problems -KY
     chartReport = ""
     
     #chartRow = len(chartReport)
@@ -97,7 +105,8 @@ else:
    
 #process lines
 
-outfile=DAVIDenrich(listF = genelist, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+outfile=""
+#outfile = DAVIDenrich(listF = genelist, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
 
 print """\
 Content-Type: text/html\n
@@ -105,6 +114,7 @@ Content-Type: text/html\n
 <p>%s</p>
 </body></html>
 """ % (message,)
-print "<p>%s</p>"%outfile
+print "<p>File output : %s</p>"%outfile
+print "<p>Currently there is an issue with accessing the DAVID Web Service -KY</p>
 print "<a href=\"map_scri_job.chartReport\" target=\"_blank\">Download</a>"
 #<a href="http://example.com/files/myfile.pdf" target="_blank">Download</a>

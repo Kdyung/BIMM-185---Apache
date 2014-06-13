@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+
+#BIMM 185 EMap project
+#In the interest of implementing the pipeline, this non web-implemented prototype is made to see how to communicate between the programs.
+#Until I figure out how to make this communicate with the web server, this is how I am doing it.
+#Using Baderlab tutorial:
+#
+
+#sample input = 12hr_topgenes.txt
 import cgi, os
 
 import cgitb; cgitb.enable()
@@ -31,7 +39,7 @@ def DAVIDenrich(listF, idType, bgF='', resF='', bgName = 'Background1',listName=
     #print 'Use categories:', 
     client.service.setCategories(category) #problems
     
-    #chartReport = client.service.getChartReport(thd,ct) #problems KEY
+    #chartReport = client.service.getChartReport(thd,ct) #Problems -KY
     chartReport = ""
     
     #chartRow = len(chartReport)
@@ -73,11 +81,9 @@ form = cgi.FieldStorage()
 
 genelist =""
 infilename = ''
-# A nested FieldStorage instance holds the file
+
 fileitem = form['file']
-# Test if the file was uploaded
-if fileitem.file:
-   
+if fileitem.file:   
    # strip leading path from file name to avoid directory traversal attacks
    fn = os.path.basename(fileitem.filename)
    #open(fn, 'wb').write(fileitem.file.read()) #edited
@@ -97,7 +103,8 @@ else:
    
 #process lines
 
-outfile=DAVIDenrich(listF = genelist, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+outfile=""
+#outfile = DAVIDenrich(listF = genelist, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
 
 print """\
 Content-Type: text/html\n

@@ -1,0 +1,81 @@
+#!/usr/bin/python
+
+#Script for analyzing clustering according to HOMER tool and tutorial.
+#http://homer.salk.edu/homer/basicTutorial/clustering.html
+
+
+#Code Sampled for implementing Heatmap: http://blog.nextgenetics.net/?e=44
+#   by Damian Kao
+
+# Take input of normalized gene expression matrix
+#test file: /SampleData/expdata_ng
+
+#6-5-14 no file input support yet
+import sys, numpy, scipy
+import scipy.cluster.hierarchy as hier
+import scipy.spatial.distance as dist
+
+def main():
+    dataMatrix,rowHeaders = getData()
+    #Calculate distance matrix
+    distanceMatrix = dist.pdist(dataMatrix)
+    #Add choosing
+    distanceMatrix = dist.pdist(dataMatrix,'hamming') #use hamming function
+    distanceMatrix = dist.pdist(dataMatrix,'euclidean') #use euclidean function
+    #calculate linkage Matrix
+    linkageMatrix = hier.linkage(distanceMatrix)
+    heatmapOrder = hier.leaves_list(linkageMatrix)
+    orderedDataMatrix = dataMatrix[heatmapOrder,:]
+    #basically what this mean is to take all columns from dataMatrix that
+    #matches the indeces in heatmapOrder array. It will perform this in the same
+    #order as the heatmapOrder array, creating a new array in the same order. 
+
+    rowHeaders = numpy.array(rowHeaders)
+    orderedRowHeaders = rowHeaders[heatmapOrder,:]
+    #do the same for the row headers 
+    
+    #output data for visualization in a browser with javascript/d3.js
+    matrixOutput = []
+    row = 0
+    for rowData in orderedDataMatrix:
+	    col = 0
+	    rowOutput = []
+	    for colData in rowData:
+		    rowOutput.append([colData, row, col])
+		    col += 1
+	    matrixOutput.append(rowOutput)
+	    row += 1
+    
+    #print this to .js for D3.js
+    #test with outfile
+    outfile = open('map_clus_data.js','w')
+    outfile.write('var maxData = ' + str(numpy.amax(dataMatrix)) + ";")
+    outfile.write( 'var minData = ' + str(numpy.amin(dataMatrix)) + ";")
+    outfile.write( 'var data = ' + str(matrixOutput) + ";")
+    outfile.write( 'var cols = ' + str(colHeaders) + ";")
+    outfile.write( 'var rows = ' + str([x for x in orderedRowHeaders]) + ";")
+    outfile.close()
+
+
+def getData(filename = './sampledata/input.data'):
+    #open the file assuming the data above is in a file called 'dataFile'
+    inFile = open(filename,'r')
+    #save the column/row headers (conditions/genes) into an array
+    colHeaders = inFile.next().strip().split()[1:]
+    rowHeaders = []
+    dataMatrix = []
+
+    for line in inFile:
+	    data = line.strip().split('\t')
+	    rowHeaders.append(data[0])
+	    dataMatrix.append([float(x) for x in data[1:]])
+
+    #convert native data array into a numpy array
+    dataMatrix = numpy.array(dataMatrix) 
+    return dataMatrix,rowHeaders
+    
+    
+    
+
+if __name__ == "__main__" :
+  main()

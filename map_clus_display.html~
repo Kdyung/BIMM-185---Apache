@@ -2,7 +2,7 @@
    <head>
    <p> Gene Expression HeatMap</p>
    <script type="text/javascript" src="d3.v2.js"></script>
-   <script type="text/javascript" src="demo_clus_data.js"></script>
+   <script type="text/javascript" src="map_clus_data.js"></script>
    <style>
       body {
          margin: 0px;

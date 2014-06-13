@@ -4,8 +4,9 @@
 <p>Author: Kyra Yung </p>
 <p>Upload a gene expression table file in the following format:</p>
 <img src="./images/Gene_exp.png" alt="Sample gene expression data">
-<form enctype="multipart/form-data" action="uploadtest.py" method="post">
+<p>Upload Testing </p>
+<form enctype="multipart/form-data" action="map_clus.py" method="post">
     <p>File: <input type="file" name="file"></p>
-    <p><input type="submit" value="Upload"></p>
+    <p><input type="submit" value="file"></p>
 </form>
 </body></html>
