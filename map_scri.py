@@ -103,8 +103,8 @@ else:
    
 #process lines
 
-outfile=""
-#outfile = DAVIDenrich(listF = genelist, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
+#outfile=""
+outfile = DAVIDenrich(listF = genelist, idType = 'GENE_SYMBOL', listName = 'list'+infilename, category = 'abcd,BBID,BIOCARTA,COG_ONTOLOGY,INTERPRO,KEGG_PATHWAY,OMIM_DISEASE,PIR_SUPERFAMILY,SMART,SP_PIR_KEYWORDS,UP_SEQ_FEATURE')
 
 print """\
 Content-Type: text/html\n
@@ -113,6 +113,5 @@ Content-Type: text/html\n
 </body></html>
 """ % (message,)
 print "<p>File output : %s</p>"%outfile
-print "<p>Currently there is an issue with accessing the DAVID Web Service -KY</p>
+print "<p>Currently there is an issue with accessing the DAVID Web Service -KY</p>"
 print "<a href=\"map_scri_job.chartReport\" target=\"_blank\">Download</a>"
-#<a href="http://example.com/files/myfile.pdf" target="_blank">Download</a>

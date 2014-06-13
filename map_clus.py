@@ -22,7 +22,7 @@ clusterdata = []
 if fileitem.file:
    fn = os.path.basename(fileitem.filename)
    #open(fn, 'wb').write(fileitem.file.read())
-   infile = open(fn,'r')
+   infile = open(fn,'rb')
    linecount = 0
    while 1:
         line = fileitem.file.readline().strip()
